@@ -8,6 +8,7 @@ import './style.css'
 
 import withPower, { makeDOMDriver } from 'powercycle'
 import { Collection, If, $, $map, $if } from 'powercycle/util'
+import { get } from 'powercycle/fp'
 
 function Square ({ props }) {
   return (
@@ -57,8 +58,9 @@ function Game ({ state }) {
   const current$ = state.stream
     .map(state => state.history[state.stepNumber])
 
-  const winner$ =
-    $map(calculateWinner)($(current$).squares)
+  const winner$ = current$
+    .map(get('squares'))
+    .map(calculateWinner)
 
   const getHandleClickReducer = i => prev => {
     const history = prev.history.slice(0, prev.stepNumber + 1)
@@ -107,6 +109,7 @@ function Game ({ state }) {
     </Collection>
 
   const status =
+    // $if($.xIsNext, 'X', '0')
     <If cond={winner$}
       then={<>Winner: {winner$}</>}
       else={<>Next player: {$if($.xIsNext, 'X', '0')}</>}

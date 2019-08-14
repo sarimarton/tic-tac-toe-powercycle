@@ -4,12 +4,16 @@
   "description": "",
   "keywords": [],
   "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html --port 1235",
+    "build": "parcel build index.html --port 1235 --no-cache"
+  },
   "dependencies": {
     "@cycle/react": "2.3.0",
     "@cycle/react-dom": "2.3.0",
     "@cycle/run": "^5.2.0",
     "@cycle/state": "^1.2.0",
-    "powercycle": "^0.17.0",
+    "powercycle": "^0.18.2",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "xstream": "^11.11.0",
@@ -23,10 +27,6 @@
     "babel-eslint": "^10.0.2",
     "parcel": "^1.12.3",
     "standard": "^12.0.1"
-  },
-  "scripts": {
-    "start": "parcel index.html --port 1235",
-    "build": "parcel build index.html --port 1235 --no-cache"
   },
   "browserslist": [
     ">0.2%",
