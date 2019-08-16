@@ -2,12 +2,11 @@
 // Tic Tac Toe example from https://codepen.io/gaearon/pen/gWWZgR
 import xs from 'xstream'
 import { run } from '@cycle/run'
-import { withState } from '@cycle/state'
 
 import './style.css'
 
 import withPower, { makeDOMDriver } from 'powercycle'
-import { Collection, If, $, $map, $if } from 'powercycle/util'
+import { Collection, If, $, $map, $if, mergeWith } from 'powercycle/util'
 import { get } from 'powercycle/fp'
 
 function Square ({ props }) {
@@ -84,14 +83,12 @@ function Game ({ state }) {
 
   const jumpToReducer = prev => {
     const step = prev.index
-    return ({
-      ...prev,
+    return mergeWith({
       outerState: {
-        ...prev.outerState,
         stepNumber: step,
-        xIsNext: (step % 2) === 0
+        isNext: (step % 2) === 0
       }
-    })
+    })(prev)
   }
 
   const move = $.index
@@ -109,7 +106,6 @@ function Game ({ state }) {
     </Collection>
 
   const status =
-    // $if($.xIsNext, 'X', '0')
     <If cond={winner$}
       then={<>Winner: {winner$}</>}
       else={<>Next player: {$if($.xIsNext, 'X', '0')}</>}
@@ -158,4 +154,4 @@ const drivers = {
   react: makeDOMDriver(document.getElementById('root'))
 }
 
-run(withState(withPower(Game)), drivers)
+run(withPower(Game), drivers)
