@@ -86,7 +86,7 @@ function Game ({ state }) {
     return mergeWith({
       outerState: {
         stepNumber: step,
-        isNext: (step % 2) === 0
+        xIsNext: (step % 2) === 0
       }
     })(prev)
   }
