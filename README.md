@@ -1,2 +1,2 @@
-# tic-tac-toe-powercycle
-Tic Tac Toe - Powercycle
+# tic-tac-toe-cyrena
+Tic Tac Toe - Cyrena
