@@ -2,27 +2,31 @@
 // Tic Tac Toe example from https://codepen.io/gaearon/pen/gWWZgR
 import xs from 'xstream'
 import { run } from '@cycle/run'
+import { withState } from '@cycle/state'
 
 import './style.css'
 
-import withPower, { makeDOMDriver } from 'powercycle'
-import { Collection, If, $, $map, $if, mergeWith } from 'powercycle/util'
-import { get } from 'powercycle/fp'
+import withPower, { makeDOMDriver } from 'cyrena'
+import { Collection, If, $, $map, $if, mergeWith } from 'cyrena/util'
+import { get } from 'cyrena/fp'
 
 function Square ({ props }) {
   return (
-    <button className='square' onClick={props.onClick}>
+    <button className='square' onClick={props._onClick}>
       {props.value}
     </button>
   )
 }
 
 function Board ({ props }) {
-  const getSquare = i =>
-    <Square
-      value={props.squares[i]}
-      onClick={() => props.onClick(i)}
-    />
+  const getSquare = i => {
+    return (
+      <Square
+        value={props.squares[i]}
+        _onClick={() => props._onClick(i)}
+      />
+    )
+  }
 
   return (
     <div>
@@ -116,7 +120,7 @@ function Game ({ state }) {
       <div className='game-board'>
         <Board
           squares={$(current$).squares}
-          onClick={i => getHandleClickReducer(i)}
+          _onClick={i => getHandleClickReducer(i)}
         />
       </div>
       <div className='game-info'>
@@ -154,4 +158,4 @@ const drivers = {
   react: makeDOMDriver(document.getElementById('root'))
 }
 
-run(withPower(Game), drivers)
+run(withState(withPower(Game)), drivers)

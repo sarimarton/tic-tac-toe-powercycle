@@ -1,19 +1,19 @@
 {
-  "name": "tic-tac-toe-powercycle",
+  "name": "tic-tac-toe-cyrena",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
   "main": "index.html",
   "scripts": {
-    "start": "parcel index.html --port 1235",
-    "build": "parcel build index.html --port 1235 --no-cache"
+    "start": "parcel index.html --port 1002",
+    "build": "parcel build index.html --no-cache"
   },
   "dependencies": {
     "@cycle/react": "2.3.0",
     "@cycle/react-dom": "2.3.0",
     "@cycle/run": "^5.2.0",
     "@cycle/state": "^1.2.0",
-    "powercycle": "^0.19.5",
+    "cyrena": "^0.20.5",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "xstream": "^11.11.0",
